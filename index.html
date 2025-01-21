@@ -10,31 +10,61 @@
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/black.css">
 
-		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	</head>
 	<body>
 		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+			<div class="slides" id="slidess">
+
 			</div>
-		</div>
+
+		<script>
+			var slides = document.getElementById('slidess');
+			
+			const video_slides = [16,35,65]
+			const video_videos = [7,2,1]
+			const loop = [false,false,true]
+			max_slides = 76
+			for (var i = 0; i <= max_slides; i++) {
+				if( video_slides.includes(i)){
+					for(var j = 0; j < video_videos[video_slides.indexOf(i)]; j++){
+						var slide = document.createElement('section');
+						slide.setAttribute('data-background-video', "public/image_" + i + "_" + j + ".mp4");
+						slide.setAttribute('data-background-size', 'contain');
+						if(loop[video_slides.indexOf(i)]){
+							slide.setAttribute('data-background-video-loop', 'true');
+						}
+
+						slides.appendChild(slide);
+					}
+				}
+				else{
+					var slide = document.createElement('section');
+					slide.setAttribute('data-background-image', 'public/image_' + i + '.png');
+				slide.setAttribute('data-background-size', 'contain');
+				slides.appendChild(slide);
+				}
+			}
+		</script>
 
 		<script src="dist/reveal.js"></script>
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
+				backgroundTransition: 'none',
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
 			});
 		</script>
+		
+		
 	</body>
 </html>
